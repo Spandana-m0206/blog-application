@@ -1,1 +1,1 @@
-module.exports=require('./comment.model');
+module.exports=require('./comment.routes');
