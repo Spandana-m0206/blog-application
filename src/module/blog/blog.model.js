@@ -16,6 +16,12 @@ const dataModle= new mongoose.Schema({
     },
     secret:{
         type:String,
+        required:true,
+        select:false
+        
+    },
+    image:{
+        type:String,
         required:true
     },
     tags:[

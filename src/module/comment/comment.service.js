@@ -9,8 +9,10 @@ exports.createComment=async (author,content)=>{
     })
     return newComment;
 }
-exports.updateComment=async (cmtId)=>{
-    model.update(cmtId)
+exports.updateComment=async (cmtId,data)=>{
+    const updatedComment=await model.findByIdAndUpdate(cmtId,data,{new:true})
+    return updatedComment
+    
     
 }
 

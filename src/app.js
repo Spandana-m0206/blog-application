@@ -1,9 +1,9 @@
 const express=require('express');
 const app=express();
 const routes=require('./module');
-
-
-// app.use("/api",routes);
+//making it compatible to recieve json file
+app.use(express.json())
+app.use("/api",routes);
 app.get('/',(req,res)=>{
     res.status(200).json({
         success:true,

@@ -9,11 +9,12 @@ const router=express.Router();
 //to get all the posts 
 router.get("/",async (req,res)=>{
     const allPosts=await dataModel.find();
-    res.send(allPosts);
+    const allPostWithoutSecret=await dataModel.find().select("-secret")
+    res.send(allPostWithoutSecret);
 
 })
 
-router.post("/create",createBlog);
+router.post("/",createBlog);
 
 router.get("/:id",getPostById);
 router.put("/:id",updatePost);
