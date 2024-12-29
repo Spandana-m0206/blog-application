@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+ 
 
 
 const cmtSchema=new mongoose.Schema({
@@ -10,13 +11,12 @@ const cmtSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    blog:{
-        //foreign key 
-        //this blog field is a type mongoose obt id which is refering to the blog model
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Blog"
+    blogId:{type:mongoose.Schema.Types.ObjectId, ref:"dataModel",required:true},
 
-    }
+
 },{timestamps:true});
 
 exports.cmtModel=mongoose.model("commentModel",cmtSchema);
+
+ //foreign key 
+        //this blog field is a type mongoose obt id which is refering to the blog model

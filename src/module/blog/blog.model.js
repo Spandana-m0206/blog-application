@@ -1,4 +1,5 @@
 const {default:mongoose}=require('mongoose');
+const commentModel=require('../comment/comment.model')
 
 
 const dataModle= new mongoose.Schema({
@@ -16,8 +17,8 @@ const dataModle= new mongoose.Schema({
     },
     secret:{
         type:String,
-        required:true,
-        select:false
+        required:true
+   
         
     },
     image:{
@@ -29,7 +30,11 @@ const dataModle= new mongoose.Schema({
         type:String
       }
     ]
+    // commentSection:[{
+    //     type:mongoose.Schema.Types.ObjectId,ref:"commentModel"
+    // }]
+
 
     
 },{timestamps:true})
-module.exports=mongoose.model("bl0gContent",dataModle);
+module.exports=mongoose.model("blogContent",dataModle);

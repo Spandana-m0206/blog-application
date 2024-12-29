@@ -31,12 +31,33 @@ const newBlog=await dataModel.create(blogData)
 
 //get id
 exports.getPost=async (blogId)=>{
-    const post =await dataModel.findById(blogId).select("+secret");
+    const post =await dataModel.findById(blogId);
     return post;
 
 }
+//page=default value =>safety purpose
+exports.allPostRequest= async (page=1,limits=1,search="")=>{
+    const filter={
+
+        $or:[
+          {title:{$regex:search,$options:"i"}},
+          {author:{$regex:search,$options:"i"}},
+          {tags:{$regex:search,$options:"i"}}
+        ]
+    }
+    const skips=(page-1)*limit;
+    const totalDoc=await dataModel.countDocuments(filter)
+    const allPosts= await dataModel.find(filter).select("-secret").skip(skips).limit(limits);
+    const totalPages=Math.ceil(totalDoc/limit)
+    return {
+        post:allPosts,
+        totalDocuments:totalDoc,
+        totalPages:totalPages,
+        currentPage:page
+    };
+}
 exports.getPostWithoutSecret=async (blogId)=>{
-    const post =await dataModel.findById(blogId).select("-secret -image");
+    const post =await dataModel.findById(blogId).select("-secret");
     return post;
 
 }

@@ -1,4 +1,4 @@
-const {creatBlog,getPost,updatePostById,deletePostById, getPostWithoutSecret}=require('./blog.service');
+const {creatBlog,getPost,updatePostById,deletePostById, getPostWithoutSecret, allPostRequest}=require('./blog.service');
 const bcrypt=require('bcrypt');
 
 
@@ -43,6 +43,30 @@ exports.createBlog = async (req,res)=>{
         message:"this is a blog api",
         data:newBlog
     })
+}
+
+
+exports.getAllPost=async (req,res)=>{
+    const input=req.query;
+    if(!input.page){
+        input.page="1"
+    }
+    if(!input.limit){
+        input.limit="1"
+    }
+    if(!input.search){
+        input.search=""
+    }
+
+    
+
+    const allPost=await allPostRequest(parseInt(input.page),parseInt(input.limit),input.search);
+    res.status(200).json({
+        success:true,
+        data:allPost
+
+    })
+
 }
 
 exports.getPostById=async (req,res)=>{

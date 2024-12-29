@@ -1,14 +1,13 @@
 const model=require('./comment.model');
-const {createNewComment,updateCmt,dltCmt}=require('./comment.controller');
+const {createNewComment,getComment,updateCmt,dltCmt, getCommentByPost}=require('./comment.controller');
 const express=require('express');
 const router=express.Router();
 //read 
-router.get('/',async ()=>{
-    const allComments=await model.find();
-    resizeBy.send(allComments);
-})
+    router.get('/:blogId',getCommentByPost)
+ 
+// router.get("/:id",getComment)
 //create
-router.post('/create',createNewComment);
+router.post('/:blogId',createNewComment);
 //update
 router.put('/:id',updateCmt);
 //delete

@@ -1,4 +1,4 @@
-const {createBlog,getPostById,updatePost,deletePost}=require("./blog.controller");
+const {createBlog,getPostById,updatePost,deletePost, getAllPost}=require("./blog.controller");
 const dataModel=require("./blog.model");
 const express=require('express');
 const router=express.Router();
@@ -7,12 +7,7 @@ const router=express.Router();
  
  
 //to get all the posts 
-router.get("/",async (req,res)=>{
-    const allPosts=await dataModel.find();
-    const allPostWithoutSecret=await dataModel.find().select("-secret")
-    res.send(allPostWithoutSecret);
-
-})
+router.get("/",getAllPost)
 
 router.post("/",createBlog);
 
